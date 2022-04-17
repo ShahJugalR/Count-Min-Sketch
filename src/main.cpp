@@ -13,7 +13,7 @@
 
 int main(){
     
-    UInt64 RBound = 999; UInt64 hashFuncCount = 100;
+    UInt64 RBound = 9; UInt64 hashFuncCount = 2;
 
     Sketch s(RBound, hashFuncCount);
     
@@ -27,6 +27,9 @@ int main(){
     {
         std::cout << i << " occured " << s.Count(i) << " times\n"; 
     }
+
+    // For logging Purpose only.
+    //  s.Display();
 
     return 0;    
 
