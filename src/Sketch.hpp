@@ -73,6 +73,8 @@ Sketch::Sketch(UInt64 inputRange, UInt64 noOfhashFunc){
 
     defMat_x = inputRange;  defMat_y = recMat_y = noOfhashFunc; recMat_x = 20;
 
+    // Inc recMat_x will inc probability.
+
     definitionMatrix = new UInt64* [defMat_y];
 
     for (UInt64 i = 0; i < defMat_y; i++)
@@ -94,12 +96,16 @@ Sketch::Sketch(UInt64 inputRange, UInt64 noOfhashFunc){
 
 void Sketch::Init(){
 
+    // Makes Sure we dont generate same random nos each time.
+    srand(time(0));
+
     // Initialize the definittion matrice.
     for (UInt64 i = 0; i < defMat_y; i++)
     {
         for (UInt64 j = 0; j < defMat_x; j++)
         {
-            definitionMatrix[i][j] = int(float(rand())*float(LONG_PRIME)/float(RAND_MAX) + 1) % 20;
+            // Makes sure we generate random no between 0 to recMat_x.
+            definitionMatrix[i][j] = rand() % recMat_x;
         }
         
     }
@@ -144,6 +150,7 @@ void Sketch::Display(){
             std::cout << definitionMatrix[i][j] << " ";
         std::cout << std::endl;
     }
+    std::cout << std::endl;
     for (UInt64 i = 0; i < recMat_y; i++){
         for (UInt64 j = 0; j < recMat_x; j++)
             std::cout << recordMatrix[i][j] << " ";
